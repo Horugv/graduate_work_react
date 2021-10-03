@@ -5,7 +5,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { store } from 'src/redux/store'
 
-import Home from 'src/pages/Home'
+import Routes from 'src/pages/Routes'
+
 import reportWebVitals from './reportWebVitals'
 
 import 'src/assets/styles/global.scss'
@@ -14,7 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <Home />
+        <Routes />
       </BrowserRouter>
     </React.StrictMode>
   </Provider>,

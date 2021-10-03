@@ -1,18 +1,11 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { IRootState } from 'src/redux/store'
+import Map from 'src/components/Map'
 
-import { actions } from 'src/redux/global/action'
+import styles from './index.module.scss'
 
 const Home = () => {
-  const dispatch = useDispatch()
-  const { global } = useSelector((state: IRootState) => state)
-  const _handleClick = () => {
-    dispatch(actions.actionIncrement())
-  }
   return (
-    <div className="App">
-      <button onClick={_handleClick}>test</button>
+    <div className={styles.home}>
+      <Map />
     </div>
   )
 }
