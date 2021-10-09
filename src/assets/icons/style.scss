@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?t034f4');
-  src:  url('fonts/icomoon.eot?t034f4#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?t034f4') format('truetype'),
-    url('fonts/icomoon.woff?t034f4') format('woff'),
-    url('fonts/icomoon.svg?t034f4#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?giyfpa');
+  src:  url('fonts/icomoon.eot?giyfpa#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?giyfpa') format('truetype'),
+    url('fonts/icomoon.woff?giyfpa') format('woff'),
+    url('fonts/icomoon.svg?giyfpa#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,15 +25,45 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-times:before {
-  content: "\e900";
-}
-.icon-tick:before {
+.icon-pin:before {
   content: "\e901";
 }
-.icon-th-menu:before {
+.icon-add-circle-outline:before {
+  content: "\e906";
+}
+.icon-block:before {
+  content: "\e907";
+}
+.icon-remove-circle:before {
+  content: "\e908";
+}
+.icon-remove-circle-outline:before {
+  content: "\e909";
+}
+.icon-gps-fixed:before {
+  content: "\e90a";
+}
+.icon-gps-not-fixed:before {
+  content: "\e90b";
+}
+.icon-menu:before {
+  content: "\e900";
+}
+.icon-adjust:before {
+  content: "\e90c";
+}
+.icon-check:before {
   content: "\e902";
 }
 .icon-user:before {
   content: "\e903";
+}
+.icon-info:before {
+  content: "\e904";
+}
+.icon-info-outline:before {
+  content: "\e905";
+}
+.icon-filter:before {
+  content: "\e90d";
 }
