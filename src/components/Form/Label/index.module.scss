@@ -1,0 +1,10 @@
+.label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 0;
+    &:not(:last-child) {
+      margin-bottom: 4px;
+    }
+  }
+  

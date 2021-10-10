@@ -1,0 +1,97 @@
+@import '/src/assets/styles/variables.scss';
+@import '/src/components/Form/index.module.scss';
+
+.select {
+  &__arrow {
+    border-color: #888 transparent transparent transparent;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    height: 0;
+    left: 50%;
+    margin-left: -4px;
+    margin-top: -2px;
+    position: absolute;
+    top: 50%;
+    width: 0;
+  }
+  :global {
+    .react-select {
+      &__input {
+        & input {
+          height: auto;
+        }
+      }
+      &__control {
+        border-radius: 4px !important;
+        border: 1px solid $colorBorder !important;
+        box-shadow: none !important;
+        overflow: hidden;
+        cursor: pointer !important;
+      }
+      &__control--menu-is-open {
+        box-shadow: none !important;
+        & .react-select__arrow {
+          border-color: transparent transparent #888 transparent;
+          border-width: 0 4px 5px 4px;
+        }
+      }
+      &__indicators {
+        position: relative;
+        width: 24px;
+      }
+      &__indicator-separator {
+        background-color: transparent !important;
+      }
+      &__value-container {
+        background: $colorWhite !important;
+        height: 40px !important;
+      }
+      &__menu {
+        background: $colorWhite;
+        border-radius: 4px !important;
+        border: 1px solid $colorBorder !important;
+        box-shadow: 0 4px 4px rgba($colorBlack, 0.25) !important;
+        margin-top: 2px !important;
+        &-list {
+          max-height: 200px !important;
+          &::-webkit-scrollbar {
+            background: $colorLightBorder;
+            width: 6px;
+            border-radius: 8px;
+            padding: 0;
+            margin: 0;
+          }
+          &::-webkit-scrollbar-button {
+            display: none;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: $colorDarkBorder;
+            border-radius: 8px;
+          }
+        }
+      }
+      &__option--is-selected {
+        background: $colorBlue !important;
+        color: $colorWhite !important;
+        img {
+          filter: brightness(2);
+        }
+      }
+      &__option {
+        cursor: pointer !important;
+        padding: 8px 16px !important;
+        &:not(:last-child) {
+          border-bottom: 1px solid $colorLightBorder;
+        }
+        &.react-select__option--is-focused {
+          background-color: $colorLightBorder;
+          color: $colorText;
+        }
+        & > span {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}

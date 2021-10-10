@@ -1,0 +1,48 @@
+@import '/src/assets/styles/variables.scss';
+
+.form {
+  &-title {
+    position: relative;
+    font-size: 18px;
+    line-height: 1.2222;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+  &-body,
+  &-group {
+    position: relative;
+    margin-bottom: 0;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+  &-flex {
+    display: flex;
+    margin-bottom: 0;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+    .form {
+      &-group {
+        &:not(:last-child) {
+          margin-right: 16px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  &-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+  &-error {
+    margin-top: 5px;
+    font-size: 10px;
+    color: $colorRed;
+  }
+}
