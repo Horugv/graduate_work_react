@@ -8,6 +8,7 @@ import { actions } from 'src/redux/modals/action'
 
 import { ModalLayout } from 'src/hoc/Modal'
 import { Input } from 'src/components/Form/Input'
+import { InputPlaceFind } from 'src/components/Form/InputPlaceFind'
 import { Button } from 'src/components/Form/Button'
 import { SelectComponent } from 'src/components/Form/Select'
 
@@ -85,7 +86,7 @@ export const ModalFilter = () => {
             />
           </div>
           <div className={styles['form-group']}>
-            <Input
+            <InputPlaceFind
               name="city"
               id="input-id-city"
               onChange={_handleInputChange}

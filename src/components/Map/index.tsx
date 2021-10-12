@@ -36,7 +36,12 @@ const GoogleMaps = () => {
   return (
     <div className={styles.map}>
       <GoogleMapReact
-        bootstrapURLKeys={{ language: 'uk', region: 'uk', key: apiKey }}
+        bootstrapURLKeys={{
+          language: 'uk',
+          region: 'uk',
+          key: apiKey,
+          libraries: ['places'],
+        }}
         options={{
           zoomControl: false,
           fullscreenControl: false,
