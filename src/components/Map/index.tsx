@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
-import GoogleMapReact, { MapOptions, Maps } from 'google-map-react'
+import GoogleMapReact, { MapOptions } from 'google-map-react'
+
+import { useCurrentLocation } from 'src/helpers/useGetCurrentLocation'
 
 import { Marker } from 'src/components/Marker'
 import { MarkerUser } from 'src/components/Marker/User'
@@ -31,7 +33,7 @@ interface MapRefType {
   current: IMapRefTypeCurrent | null
 }
 
-type PointType = {
+export type PointType = {
   lat: number
   lng: number
 }
@@ -41,12 +43,15 @@ type RoutePolylineType = {
   setMap?: any
 }
 
+const geolocationOptions = {
+  timeout: 1000 * 60 * 1,
+}
+
 const GoogleMaps = () => {
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''
-  const [currentLocation, setCurrentLocation] = useState<PointType | null>({
-    lat: 48.921797131665286,
-    lng: 24.703893728137896,
-  })
+  const { location: userDefaultLocation } =
+    useCurrentLocation(geolocationOptions)
+  const [userLocation, setUserLocation] = useState<PointType | null>(null)
   const [selectedCoord, setSelectedCoord] = useState({
     lat: 0,
     lng: 0,
@@ -61,11 +66,11 @@ const GoogleMaps = () => {
 
   // todo for route on map
   const apiIsLoaded = (map: IMap, maps: IMaps) => {
-    if (window?.google && currentLocation) {
+    if (window?.google && userLocation) {
       const directionsService = new maps.DirectionsService()
       const directionsRenderer = new maps.DirectionsRenderer()
       directionsRenderer.setMap(map)
-      const origin = { lat: currentLocation.lat, lng: currentLocation.lng }
+      const origin = { lat: userLocation.lat, lng: userLocation.lng }
       const destination = { lat: selectedCoord.lat, lng: selectedCoord.lng }
       directionsService.route(
         {
@@ -93,12 +98,12 @@ const GoogleMaps = () => {
       )
       if (mapRef) {
         const bounds = new maps.LatLngBounds()
-        bounds.extend(new maps.LatLng(currentLocation.lat, currentLocation.lng))
+        bounds.extend(new maps.LatLng(userLocation.lat, userLocation.lng))
         bounds.extend(new maps.LatLng(selectedCoord.lat, selectedCoord.lng))
         map.fitBounds(bounds)
         setCenter({
-          lat: (currentLocation.lat + selectedCoord.lat) / 2,
-          lng: (currentLocation.lng + selectedCoord.lng) / 2,
+          lat: (userLocation.lat + selectedCoord.lat) / 2,
+          lng: (userLocation.lng + selectedCoord.lng) / 2,
         })
       }
     }
@@ -115,8 +120,15 @@ const GoogleMaps = () => {
     }
   }, [selectedCoord])
 
+  useEffect(() => {
+    if (userDefaultLocation) {
+      setUserLocation(userDefaultLocation)
+      setCenter(userDefaultLocation)
+    }
+  }, [userDefaultLocation])
+
   const onCoordClick = (lat: number, lng: number) => {
-    if (currentLocation) {
+    if (userLocation) {
       setSelectedCoord({
         lat,
         lng,
@@ -146,10 +158,9 @@ const GoogleMaps = () => {
         ref={mapRef}
         // yesIWantToUseGoogleMapApiInternals
       >
-        {currentLocation && (
-          <MarkerUser lat={currentLocation.lat} lng={currentLocation.lng} />
+        {userLocation && (
+          <MarkerUser lat={userLocation.lat} lng={userLocation.lng} />
         )}
-        {console.log(points)}
         {points.length &&
           points.map((point) => (
             <Marker
