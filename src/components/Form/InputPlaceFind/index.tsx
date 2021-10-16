@@ -30,7 +30,7 @@ export const InputPlaceFind = ({
         className={styles.input}
         apiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''}
         options={{
-          types: 'geocode',
+          types: ['geocode'],
         }}
         id={id}
         onBlur={() => {

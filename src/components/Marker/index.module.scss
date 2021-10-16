@@ -1,0 +1,93 @@
+@import '/src/assets/styles/variables.scss';
+
+.marker {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  &__point {
+    cursor: pointer;
+    font-size: 36px;
+    :global {
+      .icon {
+        &-pin {
+          color: $colorOrange;
+        }
+        &-pin-user {
+          color: $colorBlue;
+        }
+      }
+    }
+  }
+  &__tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 15px);
+    transform: translateX(-50%);
+    &__inner {
+      background-color: $colorWhite;
+      width: 300px;
+      padding: 15px 15px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(91, 91, 91, 0.5);
+    }
+    &__type {
+      font-weight: 700;
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+    &__title {
+      font-size: 14px;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+    &__text {
+      font-size: 10px;
+      color: $colorDarkBorder;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+    &__coords {
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+      button {
+        padding: 0;
+        margin: 0;
+        color: $colorDarkBorder;
+      }
+    }
+    &__close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      :global {
+        .icon {
+          font-size: 12px;
+        }
+      }
+    }
+    &__triangle {
+      width: 40px;
+      height: 20px;
+      position: absolute;
+      left: 50%;
+      margin-left: -20px;
+      overflow: hidden;
+      pointer-events: none;
+      &__block {
+        width: 17px;
+        height: 17px;
+        padding: 1px;
+        margin: -10px auto 0;
+        transform: rotate(45deg);
+        background: white;
+        color: #333;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+}

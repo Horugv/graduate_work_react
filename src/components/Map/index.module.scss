@@ -1,4 +1,19 @@
 .map {
   width: 100vw;
   height: 100vh;
+  &:before {
+    content: '';
+    position: fixed;
+    background: linear-gradient(
+      to bottom,
+      rgba(40, 58, 104, 0.2) 0%,
+      rgba(40, 58, 104, 0) 100%
+    );
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20vh;
+    pointer-events: none;
+    z-index: 1;
+  }
 }

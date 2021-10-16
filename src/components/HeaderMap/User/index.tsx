@@ -14,7 +14,7 @@ const User = () => {
   useClose({ ref: userRef, onClose: () => setIsUserOpen(false) })
 
   return (
-    <div className={styles.user}>
+    <div className={styles.user} ref={userRef}>
       <div className={styles.user__container}>
         <button
           className={styles.user__btn}
