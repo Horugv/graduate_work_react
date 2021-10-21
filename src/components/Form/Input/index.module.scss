@@ -31,8 +31,8 @@
     }
   }
   &[disabled],
+  &:read-only,
   &.disabled {
     opacity: 0.5;
   }
 }
-

@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 
-import { SET_COUNTER } from './types'
+import { SET_COUNTER, SET_IS_ADD_POINT_SHOW_ACTION } from './types'
 import { IRootState } from '../store'
 
 export const actions = {
@@ -16,4 +16,8 @@ export const actions = {
     const { count } = getState().global
     dispatch(actions.actionSetCounter(count - 1))
   },
+  actionSetIsAddPointShowAction: (payload: boolean) => ({
+    type: SET_IS_ADD_POINT_SHOW_ACTION,
+    payload,
+  }),
 }

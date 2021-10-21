@@ -3,7 +3,6 @@ import { useState, useRef } from 'react'
 import { useClose } from 'src/helpers/useClose'
 
 import styles from './index.module.scss'
-import icon from 'src/assets/images/pin.svg'
 
 type MarkerType = {
   lat: number

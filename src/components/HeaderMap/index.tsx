@@ -1,13 +1,22 @@
+import { useSelector } from 'react-redux'
+
+import { IRootState } from 'src/redux/store'
+
 import Menu from './Menu'
 import User from './User'
-import { ModalFilter } from 'src/components/Modals/ModalFilter'
 
 const HeaderMap = () => {
+  const isAddPointShow = useSelector(
+    (state: IRootState) => state.global.isAddPointShow
+  )
   return (
     <>
-      <Menu />
-      <User />
-      <ModalFilter />
+      {!isAddPointShow && (
+        <>
+          <Menu />
+          <User />
+        </>
+      )}
     </>
   )
 }

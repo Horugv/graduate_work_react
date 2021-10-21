@@ -1,14 +1,20 @@
 import { useState, useRef, useEffect } from 'react'
 import GoogleMapReact, { MapOptions } from 'google-map-react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { IRootState } from 'src/redux/store'
+import * as actionsGlobal from 'src/redux/global/action'
+import * as actionsModals from 'src/redux/modals/action'
 import { useCurrentLocation } from 'src/helpers/useGetCurrentLocation'
 
 import { Marker } from 'src/components/Marker'
 import { MarkerUser } from 'src/components/Marker/User'
+import { Button } from 'src/components/Form/Button'
 
 import { mockPoint } from './points'
 
 import styles from './index.module.scss'
+import { Col } from 'react-bootstrap'
 
 interface IMaps {
   DirectionsService?: any
@@ -22,6 +28,10 @@ interface IMaps {
 
 interface IMap extends MapOptions {
   fitBounds: any
+  center: {
+    lat: () => number
+    lng: () => number
+  }
 }
 
 interface IMapRefTypeCurrent extends GoogleMapReact {
@@ -38,6 +48,15 @@ export type PointType = {
   lng: number
 }
 
+export type MarkerType = {
+  lat: number
+  lng: number
+  type: string
+  title: string
+  text: string
+  id: string
+}
+
 type RoutePolylineType = {
   current: any | null
   setMap?: any
@@ -49,6 +68,10 @@ const geolocationOptions = {
 
 const GoogleMaps = () => {
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY || ''
+  const dispatch = useDispatch()
+  const isAddPointShow = useSelector(
+    (state: IRootState) => state.global.isAddPointShow
+  )
   const { location: userDefaultLocation } =
     useCurrentLocation(geolocationOptions)
   const [userLocation, setUserLocation] = useState<PointType | null>(null)
@@ -60,7 +83,7 @@ const GoogleMaps = () => {
     lat: 48.921797131665286,
     lng: 24.703893728137896,
   })
-  const [points, setPoints] = useState(mockPoint)
+  const [points, setPoints] = useState<MarkerType[]>([])
   const mapRef: MapRefType | null = useRef(null)
   const routePolyline: RoutePolylineType = useRef()
 
@@ -136,6 +159,27 @@ const GoogleMaps = () => {
     }
   }
 
+  const _handleCloseAddPoint = () => {
+    dispatch(actionsGlobal.actions.actionSetIsAddPointShowAction(false))
+  }
+
+  const _handleShowModalAddPoint = () => {
+    dispatch(actionsGlobal.actions.actionSetIsAddPointShowAction(false))
+    dispatch(
+      actionsModals.actions.actionSetIsModalAddPointOpen({
+        isOpen: true,
+        coord: {
+          lat: mapRef.current?.map_?.center?.lat(),
+          lng: mapRef.current?.map_?.center?.lng(),
+        },
+      })
+    )
+  }
+
+  useEffect(() => {
+    setPoints([...mockPoint])
+  }, [mockPoint])
+
   return (
     <div className={styles.map}>
       <GoogleMapReact
@@ -174,6 +218,34 @@ const GoogleMaps = () => {
             />
           ))}
       </GoogleMapReact>
+      {isAddPointShow && (
+        <div className={styles['map-overlay']}>
+          <div className={styles['map-overlay__title']}>
+            Вибрати місце на мапі
+          </div>
+          <div className={styles['map-overlay__marker']}>
+            <img
+              src={require('src/assets/images/pin-add-point.svg').default}
+              alt="point"
+            />
+          </div>
+          <div className={styles['map-overlay__button']}>
+            <Col xs={6}>
+              <Button
+                onClick={() => _handleCloseAddPoint()}
+                title="Скасувати"
+                color="white"
+              />
+            </Col>
+            <Col xs={6}>
+              <Button
+                onClick={() => _handleShowModalAddPoint()}
+                title="Додати"
+              />
+            </Col>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

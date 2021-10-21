@@ -2,7 +2,8 @@ import { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import cx from 'classnames'
 
-import { actions } from 'src/redux/modals/action'
+import * as actionsGlobal from 'src/redux/global/action'
+import * as actionsModals from 'src/redux/modals/action'
 import { useClose } from 'src/helpers/useClose'
 
 import styles from './index.module.scss'
@@ -16,7 +17,12 @@ const Menu = () => {
 
   const _handleOpenFilterModal = () => {
     setIsMenuOpen(false)
-    dispatch(actions.actionSetIsModalFilterOpen(true))
+    dispatch(actionsModals.actions.actionSetIsModalFilterOpen(true))
+  }
+
+  const _handleAddPoint = () => {
+    setIsMenuOpen(false)
+    dispatch(actionsGlobal.actions.actionSetIsAddPointShowAction(true))
   }
 
   return (
@@ -39,7 +45,7 @@ const Menu = () => {
               <span className="icon icon-filter"></span>
               <span className={styles.menu__content_item_text}>Фільтр</span>
             </li>
-            <li className={styles.menu__content_item}>
+            <li className={styles.menu__content_item} onClick={_handleAddPoint}>
               <span className="icon icon-add-circle-outline"></span>
               <span className={styles.menu__content_item_text}>
                 Добавити точку

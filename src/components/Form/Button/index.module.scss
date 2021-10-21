@@ -31,5 +31,15 @@
     box-shadow: none;
     outline: none;
   }
+  &.white {
+    border: 1px solid $colorBorder;
+    background-color: $colorWhite;
+    color: $colorText;
+    &:hover {
+      border-color: $colorBlue;
+      background-color: $colorBlue;
+      color: $colorWhite;
+    }
+  }
 }
 
