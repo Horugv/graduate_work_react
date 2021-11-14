@@ -9,7 +9,7 @@ type MarkerType = {
   lng: number
   type: string
   title: string
-  text: string
+  text?: string
   onCoordClick: (lat: number, lng: number) => void
 }
 
@@ -26,12 +26,14 @@ export const Marker = ({
   useClose({ ref: tooltipRef, onClose: () => setIsShowTooltip(false) })
   return (
     <div className={styles.marker}>
-      {isShowTooltip && text && (
+      {isShowTooltip && (
         <div className={styles.marker__tooltip} ref={tooltipRef}>
           <div className={styles.marker__tooltip__inner}>
-            <div className={styles.marker__tooltip__type}>{type}</div>
-            <div className={styles.marker__tooltip__title}>{title}</div>
-            <div className={styles.marker__tooltip__text}>{text}</div>
+            {type && <div className={styles.marker__tooltip__type}>{type}</div>}
+            {title && (
+              <div className={styles.marker__tooltip__title}>{title}</div>
+            )}
+            {text && <div className={styles.marker__tooltip__text}>{text}</div>}
             <div className={styles.marker__tooltip__coords}>
               <button
                 onClick={() => onCoordClick(lat, lng)}

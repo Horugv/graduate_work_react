@@ -2,9 +2,11 @@ import { useState, useRef, useEffect } from 'react'
 import GoogleMapReact, { MapOptions } from 'google-map-react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { MarkerType } from 'src/api/markers/types'
 import { IRootState } from 'src/redux/store'
 import * as actionsGlobal from 'src/redux/global/action'
 import * as actionsModals from 'src/redux/modals/action'
+import * as actionsMapMarkers from 'src/redux/mapMarkers/action'
 import { useCurrentLocation } from 'src/helpers/useGetCurrentLocation'
 
 import { Marker } from 'src/components/Marker'
@@ -48,15 +50,6 @@ export type PointType = {
   lng: number
 }
 
-export type MarkerType = {
-  lat: number
-  lng: number
-  type: string
-  title: string
-  text: string
-  id: string
-}
-
 type RoutePolylineType = {
   current: any | null
   setMap?: any
@@ -71,6 +64,9 @@ const GoogleMaps = () => {
   const dispatch = useDispatch()
   const isAddPointShow = useSelector(
     (state: IRootState) => state.global.isAddPointShow
+  )
+  const { isLoading, dataList } = useSelector(
+    (state: IRootState) => state.mapMarker
   )
   const { location: userDefaultLocation } =
     useCurrentLocation(geolocationOptions)
@@ -159,6 +155,14 @@ const GoogleMaps = () => {
     }
   }
 
+  useEffect(() => {
+    dispatch(actionsMapMarkers.actions.actionGetDataList())
+  }, [])
+
+  useEffect(() => {
+    setPoints([...dataList])
+  }, [dataList])
+
   const _handleCloseAddPoint = () => {
     dispatch(actionsGlobal.actions.actionSetIsAddPointShowAction(false))
   }
@@ -176,9 +180,9 @@ const GoogleMaps = () => {
     )
   }
 
-  useEffect(() => {
-    setPoints([...mockPoint])
-  }, [mockPoint])
+  // useEffect(() => {
+  //   setPoints([...mockPoint])
+  // }, [mockPoint])
 
   return (
     <div className={styles.map}>
@@ -208,13 +212,13 @@ const GoogleMaps = () => {
         {points.length &&
           points.map((point) => (
             <Marker
-              lat={point.lat}
-              lng={point.lng}
-              type={point.type}
-              title={point.title}
-              text={point.text}
+              lat={point.latitude}
+              lng={point.longitude}
+              type="Тип"
+              title={point?.name}
+              text={point?.description}
               onCoordClick={onCoordClick}
-              key={point.id}
+              key={point?._id}
             />
           ))}
       </GoogleMapReact>
