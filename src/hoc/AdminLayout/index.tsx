@@ -1,5 +1,5 @@
 import React from 'react'
-import { CContainer, CFade } from '@coreui/react'
+import { CContainer } from '@coreui/react'
 
 import TheFooter from './TheFooter'
 import TheSidebar from './TheSidebar'

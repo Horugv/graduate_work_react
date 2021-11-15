@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import {
   CCreateElement,
   CSidebar,
@@ -16,14 +15,9 @@ import {
 import navigation from './_nav'
 
 const TheSidebar = () => {
-  const dispatch = useDispatch()
-  const show = useSelector((state) => state.sidebarShow)
 
   return (
-    <CSidebar
-      show={show}
-      onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
-    >
+    <CSidebar >
       <CSidebarBrand className="d-md-down-none" to="/">
         {/* <img src={'logo.svg'} alt="" className={'mw-100 px-3'} /> */}
         Graduate Work
