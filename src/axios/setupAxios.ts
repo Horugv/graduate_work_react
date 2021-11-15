@@ -37,7 +37,6 @@ export default function setupAxios(axios: AxiosInstance, store: any) {
   )
   axios.interceptors.response.use(
     function (response) {
-      console.log('response', response)
       return response
     },
     function (error) {

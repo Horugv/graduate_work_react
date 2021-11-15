@@ -180,10 +180,6 @@ const GoogleMaps = () => {
     )
   }
 
-  // useEffect(() => {
-  //   setPoints([...mockPoint])
-  // }, [mockPoint])
-
   return (
     <div className={styles.map}>
       <GoogleMapReact

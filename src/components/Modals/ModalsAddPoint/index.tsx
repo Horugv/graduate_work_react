@@ -5,9 +5,12 @@ import * as Yup from 'yup'
 
 import { IRootState } from 'src/redux/store'
 import { actions } from 'src/redux/modals/action'
+import { createMarker } from 'src/api/markers'
+import { CreateMarkerDataType } from 'src/api/markers/types'
 
 import { ModalLayout } from 'src/hoc/Modal'
 import { Input } from 'src/components/Form/Input'
+import { Textarea } from 'src/components/Form/Textarea'
 import { Button } from 'src/components/Form/Button'
 import { SelectComponent } from 'src/components/Form/Select'
 
@@ -15,10 +18,10 @@ import styles from './index.module.scss'
 import { useEffect } from 'react'
 
 const validationSchema = Yup.object().shape({
-  city: Yup.string().required('Заповніть поле!'),
+  name: Yup.string().required('Заповніть поле!'),
   type: Yup.object()
     .shape({
-      lable: Yup.string().required('Заповніть поле!'),
+      label: Yup.string().required('Заповніть поле!'),
       value: Yup.string().required('Заповніть поле!'),
     })
     .required('Заповніть поле!'),
@@ -51,12 +54,28 @@ export const ModalsAddPoint = () => {
         value: '',
         label: '',
       },
+      description: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
+      // TODO change owner when auth will be ready
+      const objData = {
+        latitude: Number(values.coord.lat),
+        longitude: Number(values.coord.lng),
+        name: values.name,
+        description: values.description,
+        owner: '61902adcb5af11f928b50b75',
+      }
+      submitData(objData)
     },
   })
+
+  const submitData = async (value: CreateMarkerDataType) => {
+    await createMarker(value)
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err))
+  }
 
   const closeModal = () => {
     dispatch(
@@ -122,6 +141,16 @@ export const ModalsAddPoint = () => {
                 />
               </Col>
             </Row>
+          </div>
+          <div className={styles['form-group']}>
+            <Textarea
+              name="description"
+              id="description-id-name"
+              onChange={_handleInputChange}
+              value={formik.values.description}
+              title="Опис"
+              error={formik.errors?.description}
+            />
           </div>
           <div className={styles['form-group']}>
             <SelectComponent
