@@ -13,6 +13,12 @@ const _nav = [
     to: '/admin/category',
     icon: <CIcon name="cil-spreadsheet" customClasses="c-sidebar-nav-icon" />,
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Точки',
+    to: '/admin/markers',
+    icon: <CIcon name="cil-spreadsheet" customClasses="c-sidebar-nav-icon" />,
+  },
 ]
 
 export default _nav

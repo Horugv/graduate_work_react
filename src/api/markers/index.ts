@@ -1,6 +1,10 @@
 import axios from 'axios'
 
-import { CreateMarkerDataType, EditMarkerDataType, GetMarkersRequest } from './types'
+import {
+  CreateMarkerDataType,
+  EditMarkerDataType,
+  GetMarkersRequest,
+} from './types'
 
 const path = '/markers'
 
@@ -10,7 +14,7 @@ export function getMarkers(page = 1, query = '') {
   )
 }
 
-export function getAllMarkers():Promise<GetMarkersRequest> {
+export function getAllMarkers(): Promise<GetMarkersRequest> {
   return axios.get(`${path}/get-all-markers`)
 }
 
@@ -22,6 +26,6 @@ export function editMarker(id: string, data: EditMarkerDataType) {
   return axios.put(`${path}/edit-marker/${id}`, data)
 }
 
-export function editCharacteristic(id: string) {
-  return axios.delete(`${path}/delete-marker/${id}`)
+export function deletMarker(id: string) {
+  return axios.delete(`${path}/delete-marker/${id}`, { data: {} })
 }
