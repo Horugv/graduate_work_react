@@ -14,7 +14,6 @@ import {
   CModalFooter,
 } from '@coreui/react'
 
-import { ActionsColumnStatus } from 'src/components/AdminPanelComponent/ActionsColumnStatus'
 import { ActionsColumnFormatter } from 'src/components/AdminPanelComponent/ActionsColumnFormatter'
 
 type userData = {
@@ -23,7 +22,6 @@ type userData = {
   email: string
   date: string
   role: string
-  status: string
 }
 
 const setFields = () => {
@@ -32,7 +30,6 @@ const setFields = () => {
     { key: 'email', label: 'Email', _style: { width: '20%' } },
     { key: 'date', label: 'Дата створення', _style: { width: '20%' } },
     { key: 'role', label: 'Роль', _style: { width: '15%' } },
-    { key: 'status', label: 'Статус', _style: { width: '10%' } },
     { key: 'actions', label: '' },
   ]
 }
@@ -44,7 +41,6 @@ const dataList: userData[] = [
     email: 'test@gmail.com',
     date: '10.10.2021',
     role: 'admin',
-    status: 'active',
   },
   {
     id: '0000-0000-0002',
@@ -52,7 +48,6 @@ const dataList: userData[] = [
     email: 'test@gmail.com',
     date: '10.11.2021',
     role: 'user',
-    status: 'banned',
   },
 ]
 
@@ -81,26 +76,16 @@ const Users = () => {
               scopedSlots={{
                 // date: (item: userData) => <td>{item.date}</td>,
                 // role: (item: userData) => <td>{item}</td>,
-                status: (item: userData) => (
-                  <td>
-                    <ActionsColumnStatus status={item.status} />
-                  </td>
-                ),
                 actions: (item: userData) => (
                   <td>
                     <ActionsColumnFormatter
                       handleEdit={() =>
                         history.push(`admin/user/form/${item.id}`)
                       }
-                      handleStatusChange={{
-                        actionActivation: () => console.log('active'),
-                        actionBan: () => console.log('banned'),
-                      }}
                       handleDelete={() => {
                         setIsModalShow(true)
                         setActiveUser(item.id)
                       }}
-                      status={item.status === 'active'}
                     />
                   </td>
                 ),

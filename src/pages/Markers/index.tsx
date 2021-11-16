@@ -21,7 +21,6 @@ import { MarkerType, MarkerMetaPagerType } from 'src/api/markers/types'
 
 import { useQuery } from 'src/helpers/useQuery'
 
-// import { ActionsColumnStatus } from 'src/components/AdminPanelComponent/ActionsColumnStatus'
 import { ActionsColumnFormatter } from 'src/components/AdminPanelComponent/ActionsColumnFormatter'
 
 const setFields = () => {
@@ -29,7 +28,6 @@ const setFields = () => {
     { key: 'name', label: 'Назва', _style: { width: '20%' } },
     { key: 'createdAt', label: 'Дата створення', _style: { width: '20%' } },
     { key: 'owner', label: 'Власник', _style: { width: '20%' } },
-    // { key: 'status', label: 'Статус', _style: { width: '10%' } },
     { key: 'actions', label: '' },
   ]
 }
@@ -92,27 +90,17 @@ const Markers = () => {
               itemsPerPage={meta.per_page ? meta.per_page : 10}
               loading={isLoading}
               scopedSlots={{
-                // status: (item: userData) => (
-                //   <td>
-                //     <ActionsColumnStatus status={item.status} />
-                //   </td>
-                // ),
                 owner: (item: MarkerType) => <td>{item?.owner?.username}</td>,
                 actions: (item: MarkerType) => (
                   <td>
                     <ActionsColumnFormatter
                       handleEdit={() =>
-                        history.push(`admin/markers/form/${item._id}`)
+                        history.push(`/admin/marker/${item._id}`)
                       }
-                      // handleStatusChange={{
-                      //   actionActivation: () => console.log('active'),
-                      //   actionBan: () => console.log('banned'),
-                      // }}
                       handleDelete={() => {
                         setIsModalShow(true)
                         setActiveMarker(item._id)
                       }}
-                      // status={item.status === 'active'}
                     />
                   </td>
                 ),

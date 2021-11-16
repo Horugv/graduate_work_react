@@ -4,6 +4,7 @@ import {
   CreateMarkerDataType,
   EditMarkerDataType,
   GetMarkersRequest,
+  GetMarkerByIdRequest,
 } from './types'
 
 const path = '/markers'
@@ -16,6 +17,10 @@ export function getMarkers(page = 1, query = '') {
 
 export function getAllMarkers(): Promise<GetMarkersRequest> {
   return axios.get(`${path}/get-all-markers`)
+}
+
+export function getMarkerById(id: string): Promise<GetMarkerByIdRequest> {
+  return axios.get(`${path}/get-marker/${id}`)
 }
 
 export function createMarker(data: CreateMarkerDataType) {

@@ -38,6 +38,12 @@ export type GetMarkersRequest = {
   }
 }
 
+export type GetMarkerByIdRequest = {
+  data: {
+    marker: MarkerType
+  }
+}
+
 export type MarkerMetaPagerType = {
   count: number
   total: number
