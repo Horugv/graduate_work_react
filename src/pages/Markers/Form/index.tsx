@@ -19,6 +19,7 @@ import {
 } from '@coreui/react'
 import * as Yup from 'yup'
 import { useHistory, RouteComponentProps } from 'react-router-dom'
+import { useToasts } from 'react-toast-notifications'
 import { useFormik } from 'formik'
 import cx from 'classnames'
 
@@ -27,9 +28,10 @@ import { MarkerType, EditMarkerDataType } from 'src/api/markers/types'
 
 type TParams = { id: string }
 
-const MarkerFormSchemaValidation = () => Yup.object().shape({
-  name: Yup.string().required("Обов'язкове поле"),
-})
+const MarkerFormSchemaValidation = () =>
+  Yup.object().shape({
+    name: Yup.string().required("Обов'язкове поле"),
+  })
 
 const initialState = {
   _id: '',
@@ -48,6 +50,7 @@ const initialState = {
 
 const MarkerForm = ({ match }: RouteComponentProps<TParams>) => {
   const markerId = match.params.id
+  const { addToast } = useToasts()
   const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
   const setFormikData = (data: MarkerType) => {
@@ -73,7 +76,12 @@ const MarkerForm = ({ match }: RouteComponentProps<TParams>) => {
       .then((res) => {
         setFormikData(res?.data?.marker)
       })
-      .catch((err) => console.error(err))
+      .catch((err) =>
+        addToast(err.response?.data?.error?.message, {
+          appearance: 'error',
+          autoDismiss: true,
+        })
+      )
       .finally(() => setIsLoading(false))
   }
 
@@ -81,10 +89,19 @@ const MarkerForm = ({ match }: RouteComponentProps<TParams>) => {
     setIsLoading(true)
     await editMarker(markerId, data)
       .then((res) => {
+        addToast('Точка успішно оновлена', {
+          appearance: 'success',
+          autoDismiss: true,
+        })
         setIsLoading(false)
         history.push('/admin/markers')
       })
-      .catch((err) => console.error(err))
+      .catch((err) =>
+        addToast(err.response?.data?.error?.message, {
+          appearance: 'error',
+          autoDismiss: true,
+        })
+      )
       .finally(() => setIsLoading(false))
   }
 

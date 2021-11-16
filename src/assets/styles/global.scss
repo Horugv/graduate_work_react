@@ -80,9 +80,10 @@ textarea {
   z-index: 1100 !important;
 }
 
-.c-app {
-  // background-color: #ebedef;
+.react-toast-notifications__container {
+  z-index: 99999 !important;
 }
+
 :root {
   --primary: #321fdb;
   --secondary: #ced2d8;

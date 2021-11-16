@@ -15,6 +15,7 @@ import {
   CModalBody,
   CModalFooter,
 } from '@coreui/react'
+import { useToasts } from 'react-toast-notifications'
 
 import { getMarkers, deletMarker } from 'src/api/markers'
 import { MarkerType, MarkerMetaPagerType } from 'src/api/markers/types'
@@ -33,6 +34,7 @@ const setFields = () => {
 }
 
 const Markers = () => {
+  const { addToast } = useToasts()
   const history = useHistory()
   const query = useQuery()
   const page = parseInt(String(query.get('page'))) || 1
@@ -63,11 +65,16 @@ const Markers = () => {
 
   const deleteItem = async (id: string) => {
     await deletMarker(id)
-      .then((res) => {
-        console.log(res.data)
+      .then(() => {
+        addToast('Точка успішно видалена', { appearance: 'success', autoDismiss: true })
         loadData(page, queryString)
       })
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        addToast(err.response?.data?.error?.message, {
+          appearance: 'error',
+          autoDismiss: true,
+        })
+      })
       .finally(() => setIsLoading(false))
   }
 
