@@ -108,7 +108,6 @@ const GoogleMaps = () => {
               strokeOpacity: 1.0,
               strokeWeight: 4,
             })
-            console.log(result)
             routePolyline.current.setMap(map)
           } else {
             console.error(`error fetching directions ${result}`)

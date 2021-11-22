@@ -144,7 +144,6 @@ const Markers = () => {
             <CButton
               onClick={() => {
                 activeMarker && deleteItem(activeMarker)
-                console.log(`delete marker ${activeMarker}`)
                 setIsModalShow(false)
                 setActiveMarker(null)
               }}

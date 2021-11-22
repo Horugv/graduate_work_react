@@ -9,8 +9,8 @@ type InputType = {
   value: string
   title?: string
   placeholder?: string
-  type?: string
-  error?: string
+  type?: 'text' | 'email' | 'password'
+  error?: string | boolean
   readonly?: boolean
 }
 

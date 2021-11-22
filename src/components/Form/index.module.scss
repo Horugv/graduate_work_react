@@ -45,4 +45,13 @@
     font-size: 10px;
     color: $colorRed;
   }
+  &-alert {
+    padding: 5px 10px;
+    background-color: rgba($colorRed, 0.9);
+    color: $colorWhite;
+    border-radius: 8px;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
 }

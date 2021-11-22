@@ -1,4 +1,10 @@
-import { SET_IS_MODAL_FILTER_OPEN, SET_IS_MODAL_ADD_POINT_OPEN, modalAddPointPayloadType } from './types'
+import {
+  SET_IS_MODAL_FILTER_OPEN,
+  SET_IS_MODAL_ADD_POINT_OPEN,
+  SET_IS_MODAL_SIGNIN_OPEN,
+  SET_IS_MODAL_SIGNUP_OPEN,
+  modalAddPointPayloadType,
+} from './types'
 
 export const actions = {
   actionSetIsModalFilterOpen: (payload: boolean) => ({
@@ -7,6 +13,14 @@ export const actions = {
   }),
   actionSetIsModalAddPointOpen: (payload: modalAddPointPayloadType) => ({
     type: SET_IS_MODAL_ADD_POINT_OPEN,
+    payload,
+  }),
+  actionSetIsModalSigninOpen: (payload: boolean) => ({
+    type: SET_IS_MODAL_SIGNIN_OPEN,
+    payload,
+  }),
+  actionSetIsModalSignupOpen: (payload: boolean) => ({
+    type: SET_IS_MODAL_SIGNUP_OPEN,
     payload,
   }),
 }

@@ -9,12 +9,14 @@ import {
   mapMarkersReducer,
   MapMarkersState,
 } from './mapMarkers/mapMarkerReducer'
+import { authReducer, AuthState } from './auth/authReducer'
 
 export interface IRootState {
   global: GlobalState
   modals: ModalsState
   token: TokenState
   mapMarker: MapMarkersState
+  auth: AuthState
 }
 
 const middlewares = [thunkMiddleware]
@@ -25,6 +27,7 @@ export const store = createStore<IRootState, any, any, any>(
     modals: modalsReducer,
     token: tokenReducer,
     mapMarker: mapMarkersReducer,
+    auth: authReducer,
   }),
   composeWithDevTools(applyMiddleware(...middlewares))
 )

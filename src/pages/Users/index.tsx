@@ -107,7 +107,6 @@ const Users = () => {
           <CModalFooter>
             <CButton
               onClick={() => {
-                console.log(`delete user ${activeUser}`)
                 setIsModalShow(false)
                 setActiveUser(null)
               }}

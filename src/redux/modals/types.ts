@@ -19,4 +19,20 @@ type IsModalAddPointOpen = {
   payload: modalAddPointPayloadType
 }
 
-export type ModalsActionTypes = IsModalFilterOpen | IsModalAddPointOpen
+export const SET_IS_MODAL_SIGNIN_OPEN = 'SET_IS_MODAL_SIGNIN_OPEN'
+type IsModalSigninOpen = {
+  type: typeof SET_IS_MODAL_SIGNIN_OPEN
+  payload: boolean
+}
+
+export const SET_IS_MODAL_SIGNUP_OPEN = 'SET_IS_MODAL_SIGNUP_OPEN'
+type IsModalSignupOpen = {
+  type: typeof SET_IS_MODAL_SIGNUP_OPEN
+  payload: boolean
+}
+
+export type ModalsActionTypes =
+  | IsModalFilterOpen
+  | IsModalAddPointOpen
+  | IsModalSigninOpen
+  | IsModalSignupOpen
