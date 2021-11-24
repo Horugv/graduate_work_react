@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAuth, signOut } from 'firebase/auth'
 import cx from 'classnames'
@@ -11,6 +10,7 @@ import { actions as authActions } from 'src/redux/auth/action'
 
 import { ModalSignin } from 'src/components/Modals/ModalSignin'
 import { ModalSignup } from 'src/components/Modals/ModalSignup'
+import { ModalPersonalInformation } from 'src/components/Modals/ModalPersonalInformation'
 
 import styles from './index.module.scss'
 
@@ -19,7 +19,6 @@ const User = () => {
   const [isUserOpen, setIsUserOpen] = useState(false)
   const { isAuth, userInfo } = useSelector((state: IRootState) => state.auth)
 
-  const id = '0000-000001'
   const userRef = useRef(null)
 
   useClose({ ref: userRef, onClose: () => setIsUserOpen(false) })
@@ -62,8 +61,22 @@ const User = () => {
                   {`${userInfo?.name} ${userInfo.family_name}`}
                 </div>
                 <ul className={styles.user__content_list}>
-                  <li className={styles.user__content_item}>
-                    <Link to={`/user/${id}`}>Особисті дані</Link>
+                  <li
+                    className={styles.user__content_item}
+                    onClick={() =>
+                      dispatch(
+                        modalActions.actionSetIsModalPersonalInformationOpen(
+                          true
+                        )
+                      )
+                    }
+                  >
+                    {/* <Link
+                      to={`/user/${id}`}
+                      
+                    > */}
+                    Особисті дані
+                    {/* </Link> */}
                   </li>
                   <li
                     className={cx(styles.user__content_item, styles.exit)}
@@ -98,6 +111,7 @@ const User = () => {
       </div>
       <ModalSignin />
       <ModalSignup />
+      <ModalPersonalInformation />
     </>
   )
 }

@@ -3,6 +3,7 @@ import {
   SET_IS_MODAL_ADD_POINT_OPEN,
   SET_IS_MODAL_SIGNIN_OPEN,
   SET_IS_MODAL_SIGNUP_OPEN,
+  SET_IS_MODAL_PERSONAL_INFORMATION_OPEN,
   modalAddPointPayloadType,
 } from './types'
 
@@ -21,6 +22,10 @@ export const actions = {
   }),
   actionSetIsModalSignupOpen: (payload: boolean) => ({
     type: SET_IS_MODAL_SIGNUP_OPEN,
+    payload,
+  }),
+  actionSetIsModalPersonalInformationOpen: (payload: boolean) => ({
+    type: SET_IS_MODAL_PERSONAL_INFORMATION_OPEN,
     payload,
   }),
 }

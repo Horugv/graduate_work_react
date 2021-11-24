@@ -10,6 +10,7 @@ type InputType = {
   title?: string
   placeholder?: string
   type?: 'text' | 'email' | 'password'
+  showError?: boolean
   error?: string | boolean
   readonly?: boolean
 }
@@ -23,6 +24,7 @@ export const Input = ({
   placeholder,
   type = 'text',
   error,
+  showError,
   readonly,
 }: InputType) => {
   return (
@@ -38,7 +40,7 @@ export const Input = ({
         placeholder={placeholder}
         readOnly={readonly}
       />
-      {error && <div className={styles['form-error']}>{error}</div>}
+      {showError && <div className={styles['form-error']}>{error}</div>}
     </div>
   )
 }

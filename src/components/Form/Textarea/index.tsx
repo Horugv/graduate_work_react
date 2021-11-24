@@ -9,6 +9,7 @@ type TextareaType = {
   value: string
   title?: string
   placeholder?: string
+  showError?: boolean
   error?: string
   readonly?: boolean
 }
@@ -20,6 +21,7 @@ export const Textarea = ({
   value,
   title,
   placeholder,
+  showError,
   error,
   readonly,
 }: TextareaType) => {
@@ -35,7 +37,7 @@ export const Textarea = ({
         placeholder={placeholder}
         readOnly={readonly}
       />
-      {error && <div className={styles['form-error']}>{error}</div>}
+      {showError && <div className={styles['form-error']}>{error}</div>}
     </div>
   )
 }

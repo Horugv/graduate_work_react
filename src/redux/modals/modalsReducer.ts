@@ -3,6 +3,7 @@ import {
   SET_IS_MODAL_ADD_POINT_OPEN,
   SET_IS_MODAL_SIGNIN_OPEN,
   SET_IS_MODAL_SIGNUP_OPEN,
+  SET_IS_MODAL_PERSONAL_INFORMATION_OPEN,
   coordType,
   ModalsActionTypes,
 } from './types'
@@ -13,6 +14,7 @@ export type ModalsState = {
   modalAddPointCoord: coordType | null
   isModalSigninOpen: boolean
   isModalSignupOpen: boolean
+  isModalPersonalInformationOpen: boolean
 }
 
 const initalState: ModalsState = {
@@ -21,6 +23,7 @@ const initalState: ModalsState = {
   modalAddPointCoord: null,
   isModalSigninOpen: false,
   isModalSignupOpen: false,
+  isModalPersonalInformationOpen: false,
 }
 
 export const modalsReducer = function (
@@ -45,6 +48,11 @@ export const modalsReducer = function (
       return {
         ...state,
         isModalSignupOpen: action.payload,
+      }
+    case SET_IS_MODAL_PERSONAL_INFORMATION_OPEN:
+      return {
+        ...state,
+        isModalPersonalInformationOpen: action.payload,
       }
     default:
       return state

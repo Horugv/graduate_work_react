@@ -31,8 +31,16 @@ type IsModalSignupOpen = {
   payload: boolean
 }
 
+export const SET_IS_MODAL_PERSONAL_INFORMATION_OPEN = 'SET_IS_MODAL_PERSONAL_INFORMATION_OPEN'
+type IsModalPersonalInformationOpen = {
+  type: typeof SET_IS_MODAL_PERSONAL_INFORMATION_OPEN
+  payload: boolean
+}
+
+
 export type ModalsActionTypes =
   | IsModalFilterOpen
   | IsModalAddPointOpen
   | IsModalSigninOpen
   | IsModalSignupOpen
+  | IsModalPersonalInformationOpen

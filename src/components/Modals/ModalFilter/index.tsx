@@ -82,6 +82,7 @@ export const ModalFilter = () => {
               onChange={_handleInputChange}
               value={formik.values.name}
               title="Назва"
+              showError={!!formik.errors?.name && !!formik.touched?.name}
               error={formik.errors?.name}
             />
           </div>

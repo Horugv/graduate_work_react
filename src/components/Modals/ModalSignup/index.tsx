@@ -100,6 +100,9 @@ export const ModalSignup = () => {
               onChange={_handleInputChange}
               value={formik.values.username}
               title="Логін"
+              showError={
+                !!formik.errors?.username && !!formik.touched?.username
+              }
               error={formik?.touched?.username && formik.errors?.username}
             />
           </div>
@@ -110,6 +113,7 @@ export const ModalSignup = () => {
               onChange={_handleInputChange}
               value={formik.values.name}
               title="Ім'я"
+              showError={!!formik.errors?.name && !!formik.touched?.name}
               error={formik?.touched?.name && formik.errors?.name}
             />
           </div>
@@ -120,6 +124,9 @@ export const ModalSignup = () => {
               onChange={_handleInputChange}
               value={formik.values.family_name}
               title="Фамілія"
+              showError={
+                !!formik.errors?.family_name && !!formik.touched?.family_name
+              }
               error={formik?.touched?.family_name && formik.errors?.family_name}
             />
           </div>
@@ -131,6 +138,7 @@ export const ModalSignup = () => {
               onChange={_handleInputChange}
               value={formik.values.email}
               title="Email"
+              showError={!!formik.errors?.email && !!formik.touched?.email}
               error={formik?.touched?.email && formik.errors?.email}
             />
           </div>
@@ -142,6 +150,9 @@ export const ModalSignup = () => {
               onChange={_handleInputChange}
               value={formik.values.password}
               title="Пароль"
+              showError={
+                !!formik.errors?.password && !!formik.touched?.password
+              }
               error={formik?.touched?.password && formik.errors?.password}
             />
           </div>

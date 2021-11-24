@@ -120,6 +120,7 @@ export const ModalsAddPoint = () => {
               onChange={_handleInputChange}
               value={formik.values.name}
               title="Назва"
+              showError={!!formik.errors?.name && !!formik.touched?.name}
               error={formik.errors?.name}
             />
           </div>
@@ -132,6 +133,9 @@ export const ModalsAddPoint = () => {
                   onChange={_handleInputChange}
                   value={`${formik.values?.coord?.lng}`}
                   title="Координати lng"
+                  showError={
+                    !!formik.errors?.coord?.lng && !!formik.touched?.coord?.lng
+                  }
                   error={formik.errors?.coord?.lng}
                   readonly
                 />
@@ -143,6 +147,9 @@ export const ModalsAddPoint = () => {
                   onChange={_handleInputChange}
                   value={`${formik.values?.coord?.lat}`}
                   title="Координати lat"
+                  showError={
+                    !!formik.errors?.coord?.lat && !!formik.touched?.coord?.lat
+                  }
                   error={formik.errors?.coord?.lat}
                   readonly
                 />
@@ -156,6 +163,9 @@ export const ModalsAddPoint = () => {
               onChange={_handleInputChange}
               value={formik.values.description}
               title="Опис"
+              showError={
+                !!formik.errors?.description && !!formik.touched?.description
+              }
               error={formik.errors?.description}
             />
           </div>

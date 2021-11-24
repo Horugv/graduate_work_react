@@ -88,6 +88,7 @@ export const ModalSignin = () => {
               onChange={_handleInputChange}
               value={formik.values.email}
               title="Email"
+              showError={!!formik.errors?.email && !!formik.touched?.email}
               error={formik.errors?.email}
             />
           </div>
@@ -99,6 +100,7 @@ export const ModalSignin = () => {
               onChange={_handleInputChange}
               value={formik.values.password}
               title="Пароль"
+              showError={!!formik.errors?.password && !!formik.touched?.password}
               error={formik.errors?.password}
             />
           </div>
