@@ -3,6 +3,7 @@ export type userData = {
   name: string
   username: string
   family_name: string
+  _id: string
 }
 
 export const SET_IS_AUTH = 'SET_IS_AUTH'

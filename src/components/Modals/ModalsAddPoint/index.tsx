@@ -4,7 +4,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { IRootState } from 'src/redux/store'
-import { actions } from 'src/redux/modals/action'
+import { actions as actionsModals } from 'src/redux/modals/action'
+import { actions as actionsMapMarkers } from 'src/redux/mapMarkers/action'
 import { createMarker } from 'src/api/markers'
 import { CreateMarkerDataType } from 'src/api/markers/types'
 
@@ -38,34 +39,36 @@ const optionsType = [
   },
 ]
 
+const inititalValues = {
+  name: '',
+  coord: {
+    lat: '',
+    lng: '',
+  },
+  type: {
+    value: '',
+    label: '',
+  },
+  description: '',
+}
+
 export const ModalsAddPoint = () => {
   const dispatch = useDispatch()
   const { isModalAddPointOpen: show, modalAddPointCoord: coord } = useSelector(
     (state: IRootState) => state.modals
   )
+  const { userInfo } = useSelector((state: IRootState) => state.auth)
+
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      coord: {
-        lat: '',
-        lng: '',
-      },
-      type: {
-        value: '',
-        label: '',
-      },
-      description: '',
-    },
+    initialValues: inititalValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-      // TODO change owner when auth will be ready
       const objData = {
         latitude: Number(values.coord.lat),
         longitude: Number(values.coord.lng),
         name: values.name,
         description: values.description,
-        owner: '61902adcb5af11f928b50b75',
+        owner: userInfo?._id || '',
       }
       submitData(objData)
     },
@@ -73,13 +76,17 @@ export const ModalsAddPoint = () => {
 
   const submitData = async (value: CreateMarkerDataType) => {
     await createMarker(value)
-      .then((res) => console.log(res))
+      .then(async (res) => {
+        await dispatch(actionsMapMarkers.actionGetDataList())
+      })
       .catch((err) => console.error(err))
+      .finally(() => closeModal())
   }
 
   const closeModal = () => {
+    formik.setValues(inititalValues)
     dispatch(
-      actions.actionSetIsModalAddPointOpen({
+      actionsModals.actionSetIsModalAddPointOpen({
         isOpen: false,
         coord: null,
       })

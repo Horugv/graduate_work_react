@@ -16,21 +16,21 @@ export function getMarkers(page = 1, query = '') {
 }
 
 export function getAllMarkers(): Promise<GetMarkersRequest> {
-  return axios.get(`${path}/get-all-markers`)
+  return axios.get(`${path}`)
 }
 
 export function getMarkerById(id: string): Promise<GetMarkerByIdRequest> {
-  return axios.get(`${path}/get-marker/${id}`)
+  return axios.get(`${path}/${id}`)
 }
 
 export function createMarker(data: CreateMarkerDataType) {
-  return axios.post(`${path}/create-marker`, data)
+  return axios.post(`${path}`, data)
 }
 
 export function editMarker(id: string, data: EditMarkerDataType) {
-  return axios.put(`${path}/edit-marker/${id}`, data)
+  return axios.put(`${path}/${id}`, data)
 }
 
 export function deletMarker(id: string) {
-  return axios.delete(`${path}/delete-marker/${id}`, { data: {} })
+  return axios.delete(`${path}/${id}`, { data: {} })
 }

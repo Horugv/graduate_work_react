@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import cx from 'classnames'
 
+import { IRootState } from 'src/redux/store'
 import * as actionsGlobal from 'src/redux/global/action'
 import * as actionsModals from 'src/redux/modals/action'
 import { useClose } from 'src/helpers/useClose'
@@ -10,8 +11,9 @@ import styles from './index.module.scss'
 
 const Menu = () => {
   const dispatch = useDispatch()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuRef = useRef(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { isAuth } = useSelector((state: IRootState) => state.auth)
 
   useClose({ ref: menuRef, onClose: () => setIsMenuOpen(false) })
 
@@ -45,12 +47,17 @@ const Menu = () => {
               <span className="icon icon-filter"></span>
               <span className={styles.menu__content_item_text}>Фільтр</span>
             </li>
-            <li className={styles.menu__content_item} onClick={_handleAddPoint}>
-              <span className="icon icon-add-circle-outline"></span>
-              <span className={styles.menu__content_item_text}>
-                Добавити точку
-              </span>
-            </li>
+            {isAuth && (
+              <li
+                className={styles.menu__content_item}
+                onClick={_handleAddPoint}
+              >
+                <span className="icon icon-add-circle-outline"></span>
+                <span className={styles.menu__content_item_text}>
+                  Добавити точку
+                </span>
+              </li>
+            )}
           </ul>
         </div>
       </div>
