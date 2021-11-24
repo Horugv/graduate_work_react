@@ -11,7 +11,7 @@ const AdminPage = () => {
       <Route path="/admin/users" exact component={Users} />
       <Route path="/admin/markers" exact component={Markers} />.
       <Route path="/admin/marker/:id" exact component={MarkerForm} />
-      {/* <Redirect to="/admin/users" /> */}
+      <Redirect to="/admin/users" />
     </Switch>
   )
 }

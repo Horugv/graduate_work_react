@@ -56,7 +56,7 @@ const Markers = () => {
     setIsLoading(true)
     await getMarkers(page, query)
       .then((res) => {
-        setData(res?.data?.data?.markers)
+        setData(res?.data?.data)
         setMeta(res?.data?.meta?.pager)
       })
       .catch((err) => console.error(err))

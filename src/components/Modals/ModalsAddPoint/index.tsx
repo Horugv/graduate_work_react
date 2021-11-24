@@ -68,7 +68,7 @@ export const ModalsAddPoint = () => {
         longitude: Number(values.coord.lng),
         name: values.name,
         description: values.description,
-        owner: userInfo?._id || '',
+        ownerID: userInfo?._id || '',
       }
       submitData(objData)
     },

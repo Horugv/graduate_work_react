@@ -2,7 +2,7 @@ export type CreateMarkerDataType = {
   latitude: number
   longitude: number
   name: string
-  owner: string
+  ownerID: string
   description?: string
 }
 
