@@ -2,8 +2,8 @@ import CIcon from '@coreui/icons-react'
 import { CButton } from '@coreui/react'
 
 type ActionsColumnFormatterProps = {
-  handleEdit: () => void
-  handleDelete: () => void
+  handleEdit?: () => void
+  handleDelete?: () => void
 }
 
 export const ActionsColumnFormatter = (props: ActionsColumnFormatterProps) => {
@@ -13,7 +13,7 @@ export const ActionsColumnFormatter = (props: ActionsColumnFormatterProps) => {
         <div className="mx-1">
           <CButton
             variant="ghost"
-            onClick={() => props.handleEdit()}
+            onClick={() => !!props?.handleEdit && props.handleEdit()}
             color="primary"
           >
             <CIcon name="cil-pencil" />
@@ -25,7 +25,7 @@ export const ActionsColumnFormatter = (props: ActionsColumnFormatterProps) => {
           <CButton
             variant="ghost"
             color="danger"
-            onClick={() => props.handleDelete()}
+            onClick={() => !!props.handleDelete && props.handleDelete()}
           >
             <CIcon name="cil-trash" />
           </CButton>

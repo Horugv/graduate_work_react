@@ -74,7 +74,7 @@ const MarkerForm = ({ match }: RouteComponentProps<TParams>) => {
     setIsLoading(true)
     await getMarkerById(markerId)
       .then((res) => {
-        setFormikData(res?.data?.marker)
+        setFormikData(res?.data?.data?.marker)
       })
       .catch((err) =>
         addToast(err.response?.data?.error?.message, {

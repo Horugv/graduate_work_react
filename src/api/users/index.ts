@@ -8,11 +8,11 @@ import {
 
 const path = '/users'
 
-// export function getMarkers(page = 1, query = '') {
-//   return axios.get(
-//     `${path}/get-markers?page=${page}${query ? '&' + query : ''}`
-//   )
-// }
+export function getUsers(page = 1, query = '') {
+  return axios.get(
+    `${path}/?page=${page}${query ? '&' + query : ''}`
+  )
+}
 
 export function getUserById(id: string): Promise<GetUserByIdRequest> {
   return axios.get(`${path}/${id}`)
@@ -26,6 +26,6 @@ export function editUser(id: string, data: EditUserDataType) {
   return axios.put(`${path}/${id}`, { user: { ...data } })
 }
 
-// export function deletMarker(id: string) {
-//   return axios.delete(`${path}/${id}`, { data: {} })
-// }
+export function deletUser(id: string) {
+  return axios.delete(`${path}/${id}`, { data: {} })
+}

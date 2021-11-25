@@ -40,7 +40,9 @@ export type GetMarkersRequest = {
 
 export type GetMarkerByIdRequest = {
   data: {
-    marker: MarkerType
+    data: {
+      marker: MarkerType
+    }
   }
 }
 

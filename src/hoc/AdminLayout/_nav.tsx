@@ -17,7 +17,7 @@ const _nav = [
     _tag: 'CSidebarNavItem',
     name: 'Точки',
     to: '/admin/markers',
-    icon: <CIcon name="cil-spreadsheet" customClasses="c-sidebar-nav-icon" />,
+    icon: <CIcon name="cil-map" customClasses="c-sidebar-nav-icon" />,
   },
 ]
 
